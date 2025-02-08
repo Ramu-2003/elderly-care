@@ -1,0 +1,491 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Elderly Care App
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #333;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            transition: transform 0.2s;
+        }
+        .btn-primary {
+            background-color: #1D4ED8;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2563EB;
+        }
+        .btn-secondary {
+            background-color: #EF4444;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #F87171;
+        }
+        .header, .footer {
+            background-color: #1D4ED8;
+            color: white;
+        }
+        .header h1, .footer p {
+            margin: 0;
+        }
+        .header {
+            padding: 1rem;
+        }
+        .footer {
+            padding: 1rem;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+        }
+        .card img {
+            border-radius: 50%;
+        }
+        .card h3 {
+            margin-top: 1rem;
+            font-size: 1.25rem;
+        }
+        .card p {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+          /* Added Styles */
+        #medication-list ul {
+        list-style: none;
+        padding: 0;
+        }
+
+        #medication-list li {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+  </style>
+ </head>
+ <body>
+  <!-- First Interface -->
+  <div class="flex flex-col items-center justify-center h-screen text-white" id="interface-1">
+   <h1 class="text-4xl font-bold mb-4">
+    Elderly Care
+   </h1>
+   <p class="text-xl mb-8">
+    Your Health is our Priority
+   </p>
+   <button class="btn btn-primary" onclick="navigateTo('interface-2')">
+    GET STARTED
+   </button>
+  </div>
+  <!-- Second Interface -->
+  <div class="hidden container mx-auto p-4" id="interface-2">
+   <h2 class="text-2xl font-bold mb-8 text-center">
+    Choose an Option
+   </h2>
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="card hover:bg-gray-100" onclick="navigateTo('interface-3')">
+     <i class="fas fa-heartbeat text-red-500 text-4xl mb-4">
+     </i>
+     <h3 class="text-xl font-bold">
+      Monitor Health
+     </h3>
+    </div>
+    <div class="card hover:bg-gray-100" onclick="navigateTo('interface-4')">
+     <i class="fas fa-hospital text-blue-500 text-4xl mb-4">
+     </i>
+     <h3 class="text-xl font-bold">
+      Hospitals Near Me
+     </h3>
+    </div>
+    <div class="card hover:bg-gray-100" onclick="navigateTo('interface-5')">
+     <i class="fas fa-utensils text-green-500 text-4xl mb-4">
+     </i>
+     <h3 class="text-xl font-bold">
+      Diet Plan
+     </h3>
+    </div>
+    <div class="card hover:bg-gray-100" onclick="navigateTo('interface-6')">
+     <i class="fas fa-briefcase-medical text-yellow-500 text-4xl mb-4">
+     </i>
+     <h3 class="text-xl font-bold">
+      Health Checkup Alerts
+     </h3>
+    </div>
+    <div class="card hover:bg-gray-100" onclick="navigateTo('interface-7')">
+     <i class="fas fa-capsules text-purple-500 text-4xl mb-4">
+     </i>
+     <h3 class="text-xl font-bold">
+      Medication Reminders
+     </h3>
+    </div>
+    <div class="card hover:bg-gray-100" onclick="navigateTo('interface-8')">
+        <i class="fas fa-comment-dots text-indigo-500 text-4xl mb-4"></i>
+        <h3 class="text-xl font-bold">Real-time Communication</h3>
+    </div>
+        <div class="card hover:bg-gray-100" onclick="navigateTo('interface-9')">
+            <i class="fas fa-brain text-teal-500 text-4xl mb-4"></i>
+            <h3 class="text-xl font-bold">Cognitive Games</h3>
+        </div>
+   </div>
+   <div class="text-center mt-8">
+    <button class="btn btn-secondary" onclick="makeEmergencyCall()">
+     Emergency Call
+    </button>
+   </div>
+  </div>
+  <!-- Third Interface (Monitor Health) -->
+  <div class="hidden container mx-auto p-4" id="interface-3">
+   <button class="text-blue-600 mb-4" onclick="navigateTo('interface-2')">
+    <i class="fas fa-arrow-left">
+    </i>
+    Back
+   </button>
+   <h2 class="text-2xl font-bold mb-4">
+    Health Info
+   </h2>
+   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="card hover:bg-gray-100">
+     <i class="fas fa-heartbeat text-red-500 text-4xl mb-4">
+     </i>
+     <h3 class="text-xl font-bold">
+      Heart Beating
+     </h3>
+     <p class="text-2xl mt-2" id="heart-rate">
+      72 bpm
+     </p>
+    </div>
+    <div class="card hover:bg-gray-100">
+     <i class="fas fa-pulse text-blue-500 text-4xl mb-4">
+     </i>
+     <h3 class="text-xl font-bold">
+      Pulse Rate
+     </h3>
+     <p class="text-2xl mt-2" id="pulse-rate">
+      75 bpm
+     </p>
+    </div>
+    <div class="card hover:bg-gray-100">
+     <i class="fas fa-tint text-blue-500 text-4xl mb-4">
+     </i>
+     <h3 class="text-xl font-bold">
+      Hydration Level
+     </h3>
+     <p class="text-2xl mt-2" id="hydration-level">
+      60%
+     </p>
+    </div>
+    <div class="card hover:bg-gray-100">
+     <i class="fas fa-tachometer-alt text-red-500 text-4xl mb-4">
+     </i>
+     <h3 class="text-xl font-bold">
+      Blood Pressure
+     </h3>
+     <p class="text-2xl mt-2" id="blood-pressure">
+      120/80 mmHg
+     </p>
+    </div>
+       <div class="card hover:bg-gray-100">
+            <i class="fas fa-walking text-green-500 text-4xl mb-4"></i>
+            <h3 class="text-xl font-bold">Steps Walked</h3>
+            <p class="text-2xl mt-2" id="steps-walked">1500</p>
+        </div>
+        <div class="card hover:bg-gray-100">
+            <i class="fas fa-thermometer-half text-orange-500 text-4xl mb-4"></i>
+            <h3 class="text-xl font-bold">Temperature</h3>
+            <p class="text-2xl mt-2" id="temperature">37°C</p>
+        </div>
+   </div>
+  </div>
+  <!-- Fourth Interface (Hospitals Near Me) -->
+  <div class="hidden container mx-auto p-4" id="interface-4">
+   <button class="text-blue-600 mb-4" onclick="navigateTo('interface-2')">
+    <i class="fas fa-arrow-left">
+    </i>
+    Back
+   </button>
+   <h2 class="text-2xl font-bold mb-4">
+    Nearby Hospitals
+   </h2>
+   <div class="bg-white p-4 rounded shadow" id="hospitals-list">
+    <p>
+     Loading hospitals near you...
+    </p>
+   </div>
+  </div>
+  <!-- Fifth Interface (Diet Plan) -->
+  <div class="hidden container mx-auto p-4" id="interface-5">
+   <button class="text-blue-600 mb-4" onclick="navigateTo('interface-2')">
+    <i class="fas fa-arrow-left">
+    </i>
+    Back
+   </button>
+   <h2 class="text-2xl font-bold mb-4">
+    Diet Plan
+   </h2>
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="card hover:bg-gray-100" onclick="navigateTo('interface-5a')">
+     <i class="fas fa-apple-alt text-red-500 text-4xl mb-4">
+     </i>
+     <h3 class="text-xl font-bold">
+      Nutrients Info
+     </h3>
+     <p>
+      Details about nutrients in various fruits and vegetables.
+     </p>
+    </div>
+    <div class="card hover:bg-gray-100" onclick="navigateTo('interface-5b')">
+     <i class="fas fa-clipboard-list text-green-500 text-4xl mb-4">
+     </i>
+     <h3 class="text-xl font-bold">
+      Diet Plans
+     </h3>
+     <p>
+      Suggested diet plans for various health conditions.
+     </p>
+    </div>
+   </div>
+  </div>
+  <!-- Fifth Interface A (Nutrients Info) -->
+  <div class="hidden container mx-auto p-4" id="interface-5a">
+   <button class="text-blue-600 mb-4" onclick="navigateTo('interface-5')">
+    <i class="fas fa-arrow-left">
+    </i>
+    Back
+   </button>
+   <h2 class="text-2xl font-bold mb-4">
+    Nutrients Info
+   </h2>
+   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="card hover:bg-gray-100">
+     <img alt="Image of an apple" class="mx-auto mb-4" src="https://i.pinimg.com/736x/d2/fa/f7/d2faf7fd70c788abda2b8b8f90ee26e9.jpg"/>
+     <h3 class="text-xl font-bold">
+      Apple
+     </h3>
+     <p class="text-sm">
+      Fat: 0.2g, Protein: 0.3g, Fiber: 2.4g
+     </p>
+    </div>
+    <div class="card hover:bg-gray-100">
+     <img alt="Image of a banana" class="mx-auto mb-4" src="https://i.pinimg.com/736x/ea/cf/b0/eacfb07dc1af7accc349283e7401af1d.jpg"/>
+     <h3 class="text-xl font-bold">
+      Banana
+     </h3>
+     <p class="text-sm">
+      Fat: 0.3g, Protein: 1.3g, Fiber: 2.6g
+     </p>
+    </div>
+    <div class="card hover:bg-gray-100">
+     <img alt="Image of a carrot" class="mx-auto mb-4" src="https://i.pinimg.com/736x/27/93/be/2793be522f0cbedc41bd0b1dfa0349ee.jpg"/>
+     <h3 class="text-xl font-bold">
+      Carrot
+     </h3>
+     <p class="text-sm">
+      Fat: 0.2g, Protein: 0.9g, Fiber: 2.8g
+     </p>
+    </div>
+    <div class="card hover:bg-gray-100">
+     <img alt="Image of a broccoli" class="mx-auto mb-4" src="https://i.pinimg.com/736x/44/66/fd/4466fd6dfd167b09570bd72caf5374f5.jpg"/>
+     <h3 class="text-xl font-bold">
+      Broccoli
+     </h3>
+     <p class="text-sm">
+      Fat: 0.4g, Protein: 2.8g, Fiber: 2.6g
+     </p>
+    </div>
+    <div class="card hover:bg-gray-100">
+     <img alt="Image of a strawberry" class="mx-auto mb-4" src="https://i.pinimg.com/736x/58/17/dc/5817dcb68aaabb520d32249094be105d.jpg"/>
+     <h3 class="text-xl font-bold">
+      Strawberry
+     </h3>
+     <p class="text-sm">
+      Fat: 0.3g, Protein: 0.8g, Fiber: 2.0g
+     </p>
+    </div>
+    <div class="card hover:bg-gray-100">
+     <img alt="Image of a spinach" class="mx-auto mb-4" src="https://i.pinimg.com/736x/81/21/35/8121350a5f1cc108c52e27a10c2503dd.jpg"/>
+     <h3 class="text-xl font-bold">
+      Spinach
+     </h3>
+     <p class="text-sm">
+      Fat: 0.4g, Protein: 2.9g, Fiber: 2.2g
+     </p>
+    </div>
+   </div>
+  </div>
+  <!-- Fifth Interface B (Diet Plans) -->
+  <div class="hidden container mx-auto p-4" id="interface-5b">
+   <button class="text-blue-600 mb-4" onclick="navigateTo('interface-5')">
+    <i class="fas fa-arrow-left">
+    </i>
+    Back
+   </button>
+   <h2 class="text-2xl font-bold mb-4">
+    Diet Plans
+   </h2>
+   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="card hover:bg-gray-100">
+     <img alt="Image representing diabetes diet plan" class="mx-auto mb-4" src="https://i.pinimg.com/736x/44/3a/37/443a376c28fa19c4e802732dd03b658a.jpg"/>
+     <h3 class="text-xl font-bold">
+      Diabetes Diet Plan
+     </h3>
+     <p class="text-sm">
+      Low sugar, high fiber, balanced protein.
+     </p>
+    </div>
+    <div class="card hover:bg-gray-100">
+     <img alt="Image representing heart health diet plan" class="mx-auto mb-4" src="https://i.pinimg.com/736x/29/ff/77/29ff7762ee99968d777846567db484fb.jpg"/>
+     <h3 class="text-xl font-bold">
+      Heart Health Diet Plan
+     </h3>
+     <p class="text-sm">
+      Low fat, high omega-3, balanced carbs.
+     </p>
+    </div>
+    <div class="card hover:bg-gray-100">
+     <img alt="Image representing weight loss diet plan" class="mx-auto mb-4" src="https://i.pinimg.com/736x/aa/76/ed/aa76ed4f0fbdd87b744ecb38de194837.jpg"/>
+     <h3 class="text-xl font-bold">
+      Weight Loss Diet Plan
+     </h3>
+     <p class="text-sm">
+      Low calorie, high protein, balanced nutrients.
+     </p>
+    </div>
+   </div>
+  </div>
+  <!-- Sixth Interface (Health Checkup Alerts) -->
+  <div class="hidden container mx-auto p-4" id="interface-6">
+   <button class="text-blue-600 mb-4" onclick="navigateTo('interface-2')">
+    <i class="fas fa-arrow-left">
+    </i>
+    Back
+   </button>
+   <h2 class="text-2xl font-bold mb-4">
+    Health Check-ups
+   </h2>
+   <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+    <i class="fas fa-calendar-check text-green-500 text-4xl mb-4">
+    </i>
+    <h3 class="text-xl font-bold">
+     Checkup Schedule
+    </h3>
+    <p>
+     Monitor for how many days a person should have health check-ups.
+    </p>
+    <ul class="list-disc pl-5 mt-2">
+     <li>
+      General Check-up: Every 6 months
+     </li>
+     <li>
+      Blood Test: Every 3 months
+     </li>
+     <li>
+      Heart Check-up: Every year
+     </li>
+     <li>
+      Eye Check-up: Every 2 years
+     </li>
+    </ul>
+   </div>
+  </div>
+  <!-- Seventh Interface (Medication Reminders) -->
+   <div class="hidden container mx-auto p-4" id="interface-7">
+        <button class="text-blue-600 mb-4" onclick="navigateTo('interface-2')">
+            <i class="fas fa-arrow-left"></i>
+            Back
+        </button>
+        <h2 class="text-2xl font-bold mb-4">
+            Medication Reminders
+        </h2>
+        <div id="medication-list">
+            <p>Loading medications...</p>
+        </div>
+        <button class="btn btn-primary" onclick="addMedication()">
+            Add Medication
+        </button>
+    </div>
+
+    <!-- Eighth Interface (Real-time Communication) -->
+    <div class="hidden container mx-auto p-4" id="interface-8">
+        <button class="text-blue-600 mb-4" onclick="navigateTo('interface-2')">
+            <i class="fas fa-arrow-left"></i>
+            Back
+        </button>
+        <h2 class="text-2xl font-bold mb-4">
+            Real-time Communication
+        </h2>
+        <div id="chat-container">
+            <div id="chat-messages">
+                <!-- Messages will be displayed here -->
+            </div>
+            <div id="chat-input">
+                <input type="text" id="message-input" placeholder="Type your message..."/>
+                <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ninth Interface (Cognitive Games) -->
+    <div class="hidden container mx-auto p-4" id="interface-9">
+        <button class="text-blue-600 mb-4" onclick="navigateTo('interface-2')">
+            <i class="fas fa-arrow-left"></i>
+            Back
+        </button>
+        <h2 class="text-2xl font-bold mb-4">
+            Cognitive Games
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="card hover:bg-gray-100" onclick="startMemoryGame()">
+                <i class="fas fa-memory text-blue-500 text-4xl mb-4"></i>
+                <h3 class="text-xl font-bold">Memory Game</h3>
+                <p>Test your memory skills.</p>
+            </div>
+            <div class="card hover:bg-gray-100" onclick="startNumberPuzzle()">
+                <i class="fas fa-puzzle-piece text-green-500 text-4xl mb-4"></i>
+                <h3 class="text-xl font-bold">Number Puzzle</h3>
+                <p>Solve number puzzles.</p>
+            </div>
+        </div>
+        <div id="game-container">
+            <!-- Game content will be loaded here -->
+        </div>
+    </div>
+  <footer class="footer">
+   <div class="container">
+    <p>
+     Designed with love for Elderly People
+    </p>
+   </div>
+  </footer>
+  <script src="EC_modified_1.js">
+  </script>
+ </body>
+</html>
